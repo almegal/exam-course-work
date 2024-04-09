@@ -5,11 +5,12 @@ import com.example.examcoursework.repository.QuestionRepository;
 import com.example.examcoursework.service.question.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
 import java.util.Set;
 
-@Repository
+@Service("JavaQuestionServiceImpl")
 public class JavaQuestionServiceImpl implements QuestionService {
     private final QuestionRepository questionRepository;
     private final Random random;
