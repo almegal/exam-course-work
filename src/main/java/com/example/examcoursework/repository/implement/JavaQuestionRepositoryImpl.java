@@ -1,31 +1,52 @@
 package com.example.examcoursework.repository.implement;
 
+import com.example.examcoursework.Exception.ExceptionQuestionIsExsist;
+import com.example.examcoursework.Exception.ExceptionQuestionIsNotExsist;
 import com.example.examcoursework.model.Question;
 import com.example.examcoursework.repository.QuestionRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Repository
 public class JavaQuestionRepositoryImpl implements QuestionRepository {
-    private Set<Question> questions;
+    private final Set<Question> questions;
 
     public JavaQuestionRepositoryImpl() {
-        this.questions = questions;
+        this.questions = new HashSet<>();
     }
 
     @Override
     public Question add(String question, String answer) {
-        return null;
+        // проверяем валидность аргументов
+        checkArgs(question, answer);
+        // создаем и добавляем во множество наш вопрос
+        // и записываем результат добавления  true/false в переменную
+        final Question q = new Question(question, answer);
+        boolean isAdded = questions.add(q);
+        // проверяем если вернулся false значит такой вопрос уже есть
+        if(!isAdded) throw new ExceptionQuestionIsExsist("Такой вопрос уже есть в списке");
+        return q;
     }
 
     @Override
     public Question remove(Question question) {
-        return null;
+        boolean isRemoved = questions.remove(question);
+        if(!isRemoved) throw new ExceptionQuestionIsNotExsist("Такого вопроса нет в списке");
+        return question;
     }
 
     @Override
     public Set<Question> getAll() {
-        return null;
+        return Collections.unmodifiableSet(questions);
+    }
+
+    private void checkArgs(String question, String answer) {
+        if((question == null || answer == null || question.isBlank() || answer.isBlank()) ) {
+            String errorMsg = String.format("Некорректный аргумент, метод ожидает строку, а переданы: question: %s; answer: %s;", question, answer);
+            throw new IllegalArgumentException(errorMsg);
+        }
     }
 }
