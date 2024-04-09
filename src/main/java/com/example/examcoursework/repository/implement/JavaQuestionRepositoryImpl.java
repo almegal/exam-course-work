@@ -4,6 +4,7 @@ import com.example.examcoursework.Exception.ExceptionQuestionIsExsist;
 import com.example.examcoursework.Exception.ExceptionQuestionIsNotExsist;
 import com.example.examcoursework.model.Question;
 import com.example.examcoursework.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -33,16 +34,20 @@ public class JavaQuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Question remove(Question question) {
+        // удаляем вопрос из сета
+        // результат записываем в переменную
         boolean isRemoved = questions.remove(question);
+        // если false значить не было такого вопроса в списке
         if(!isRemoved) throw new ExceptionQuestionIsNotExsist("Такого вопроса нет в списке");
         return question;
     }
 
     @Override
     public Set<Question> getAll() {
+        // возращаем коллекцию только для чтения
         return Collections.unmodifiableSet(questions);
     }
-
+    // проверка валидности аргумента
     private void checkArgs(String question, String answer) {
         if((question == null || answer == null || question.isBlank() || answer.isBlank()) ) {
             String errorMsg = String.format("Некорректный аргумент, метод ожидает строку, а переданы: question: %s; answer: %s;", question, answer);
