@@ -4,7 +4,6 @@ import com.example.examcoursework.model.Question;
 import com.example.examcoursework.repository.QuestionRepository;
 import com.example.examcoursework.service.question.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
