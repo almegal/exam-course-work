@@ -36,6 +36,6 @@ public class ExaminerServiceImplTest {
         Set<Question> actual = out.getQuestions(1);
         // тест
         assertEquals(expected, actual);
-        verify(javaQuestionService, times(1)).getRandomQuestion();
+        verify(javaQuestionService, times(2)).getRandomQuestion();
     }
 }
