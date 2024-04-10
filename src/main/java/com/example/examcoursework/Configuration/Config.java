@@ -4,6 +4,8 @@ import com.example.examcoursework.model.Question;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -16,7 +18,7 @@ public class Config {
 
     @Bean
     Set<Question> DEFAULT_JAVA_QUESTION_SET() {
-        return Set.of(
+        return new HashSet<>(Arrays.asList(
                 new Question("Что такое ООП?", "Объектно-ориентированное программирование (ООП) — методология программирования, основанная на представлении программы в виде совокупности объектов, каждый из которых является экземпляром определенного класса, а классы образуют иерархию наследования." +
                         "" +
                         "объектно-ориентированное программирование использует в качестве основных логических конструктивных элементов объекты, а не алгоритмы;" +
@@ -33,6 +35,16 @@ public class Config {
                         "" +
                         "mock использует подмену результатов вызова, проверяет сам факт взаимодействия, протоколирует и контролирует его." +
                         "")
-        );
+        ));
+    }
+    @Bean
+    Set<Question> DEFAULT_MATH_QUESTION(){
+        return new HashSet<>(Arrays.asList(
+                new Question("Число, у которого нет собственного числа?", "0"),
+                new Question("Назовите единственное четное простое число?", "Две"),
+                new Question("9*N равно 108. Что такое N?", "N = 12"),
+                new Question("Кто изобрел знак равенства '='?", "Роберт Рекорд."),
+                new Question("Значение Пи?", "3.14159")
+        ));
     }
 }
