@@ -15,8 +15,8 @@ import java.util.Set;
 public class JavaQuestionRepositoryImpl implements QuestionRepository {
     private final Set<Question> questions;
 
-    public JavaQuestionRepositoryImpl() {
-        this.questions = new HashSet<>();
+    public JavaQuestionRepositoryImpl(Set<Question> DEFAULT_JAVA_QUESTION_SET) {
+        this.questions = DEFAULT_JAVA_QUESTION_SET;
     }
 
     @Override
