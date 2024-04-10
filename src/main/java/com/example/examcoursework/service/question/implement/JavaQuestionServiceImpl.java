@@ -48,7 +48,7 @@ public class JavaQuestionServiceImpl implements QuestionService {
         // используем бин из конфига для получения рандомного значения
         int questionNum = random.nextInt(allQuestions.size());
         // создаем стартовый индекс
-        int index = 1;
+        int index = 0;
         // проходим циклом по списку пока индекс не равен рандомному числу
         for (Question question : allQuestions) {
             if(index == questionNum) {

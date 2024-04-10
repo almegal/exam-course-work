@@ -102,7 +102,7 @@ public class JavaQuestionServiceImplTest {
         // подготовка ожидаемого результата
         when(questionRepositoryMock.getAll()).thenReturn(DEFAULT_QUESTION_SET);
         when(randomMock.nextInt(anyInt())).thenReturn(3);
-        Question expected = new ArrayList<Question>(DEFAULT_QUESTION_SET).get(3 - 1);
+        Question expected = new ArrayList<Question>(DEFAULT_QUESTION_SET).get(3);
         // подготовка акутального результата
         Question actual = out.getRandomQuestion();
         // тест
