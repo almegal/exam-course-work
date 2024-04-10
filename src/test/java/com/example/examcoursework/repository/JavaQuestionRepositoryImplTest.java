@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JavaQuestionRepositoryImplTest {
     // константы
     private static final Question DEFAULT_QUESTION = new Question("Вопрос 1", "Ответ 1");
-    private final QuestionRepository questionRepository = new JavaQuestionRepositoryImpl();
+    private final QuestionRepository questionRepository = new JavaQuestionRepositoryImpl(new HashSet<>());
     @BeforeEach
     public void set_up(){
         questionRepository.add(DEFAULT_QUESTION.getQuestion(), DEFAULT_QUESTION.getAnswer());
