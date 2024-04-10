@@ -22,22 +22,23 @@ public class ExaminerServiceImpl implements ExaminerService {
     }
     @Override
     public Set<Question> getQuestions(int amount) {
-        final Set<Question> questions = javaQuestionService.getAll();
+        final Set<Question> javaQuestions = javaQuestionService.getAll();
+        final Set<Question> mathQuestions = javaQuestionService.getAll();
         // получаем размер списка и проверяем что есть необходимое количество вопросов в списке
-        final int size = questions.size();
-        if(size < amount || size == 0) throw new IllegalArgumentException("Количество необходимых вопросов превышает размер списка или равно 0");
+        final int javaSize = javaQuestions.size();
+        final int mathSize = mathQuestions.size();
+        if((javaSize < amount || javaSize == 0) || (mathSize < amount || mathSize == 0)) {
+            throw new IllegalArgumentException("Количество необходимых вопросов превышает размер списка или равно 0");
+        }
         // создаем множество куда добавим уникальные вопросы и ответы
         Set<Question> result = new HashSet<>();
         // пока больше нуля
-        while (amount > 0) {
+        while (result.size() < amount) {
             // получаем рандомные вопрос
             Question javaQuestion = javaQuestionService.getRandomQuestion();
             Question mathQuestion = mathQuestionService.getRandomQuestion();
-            // проверяем что вопрос добавленный уникален
-            boolean javaIsAdded = result.add(javaQuestion);
-            boolean mathIsAdded = result.add(mathQuestion);
-            // если истинно уменьшаем значение
-            if(javaIsAdded && mathIsAdded) amount--;
+            result.add(javaQuestion);
+            result.add(mathQuestion);
         }
         return result;
     }
