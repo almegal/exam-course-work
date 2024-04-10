@@ -7,6 +7,7 @@ public class Question {
     private final String answer;
 
     public Question(String question, String answer) {
+        if(question.equals(answer)) throw new IllegalArgumentException("Вопрос и ответ - одно значение");
         this.question = question;
         this.answer = answer;
     }
