@@ -1,5 +1,6 @@
 package com.example.examcoursework.controller;
 
+import com.example.examcoursework.Exception.ExceptionMethodNotAlowed;
 import com.example.examcoursework.model.Question;
 import com.example.examcoursework.service.question.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,20 +19,23 @@ public class MathQuestionController {
     public MathQuestionController(@Qualifier("MathQuestionServiceImpl") QuestionService questionService) {
         this.questionService = questionService;
     }
-    @GetMapping(path="/add")
+
+    @GetMapping(path = "/add")
     public Question add(
             @RequestParam("question") String question,
             @RequestParam("answer") String answer) {
         return questionService.add(question, answer);
     }
-    @GetMapping(path="/remove")
+
+    @GetMapping(path = "/remove")
     public Question remove(
             @RequestParam("question") String question,
             @RequestParam("answer") String answer) {
         return questionService.remove(new Question(question, answer));
     }
+
     @GetMapping(path = "/find")
-    public Set<Question> remove() {
-        return questionService.getAll();
+    public Set<Question> getAll() {
+        throw new ExceptionMethodNotAlowed("Методы больше не существует");
     }
 }

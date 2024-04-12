@@ -27,11 +27,11 @@ public class ExaminerServiceImplTest {
 
     @Test
     @DisplayName("Получить рандомные вопросы")
-    public void getAmountQuestions(){
+    public void getAmountQuestions() {
         // подготовка ожидаемого результата
-        Set<Question> expected = Set.of(new Question("Вопрос 1","Ответ 1"));
+        Set<Question> expected = Set.of(new Question("Вопрос 1", "Ответ 1"));
         when(javaQuestionService.getAll()).thenReturn(expected);
-        when(javaQuestionService.getRandomQuestion()).thenReturn(new Question("Вопрос 1","Ответ 1"));
+        when(javaQuestionService.getRandomQuestion()).thenReturn(new Question("Вопрос 1", "Ответ 1"));
         // подготовка актуального результата
         Set<Question> actual = out.getQuestions(1);
         // тест

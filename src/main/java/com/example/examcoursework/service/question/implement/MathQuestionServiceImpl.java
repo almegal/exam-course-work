@@ -16,27 +16,31 @@ public class MathQuestionServiceImpl implements QuestionService {
     private final Set<Question> questions;
     private final Random random;
 
-    public MathQuestionServiceImpl(Set<Question> DEFAULT_MATH_QUESTION,
-            Random random) {
+    public MathQuestionServiceImpl(Set<Question> DEFAULT_MATH_QUESTION, Random random) {
         this.questions = DEFAULT_MATH_QUESTION;
         this.random = random;
     }
+
     @Override
     public Question add(String question, String answer) {
         throw new ExceptionMethodNotAlowed("Методы больше не существует");
     }
+
     @Override
     public Question add(Question question) {
         throw new ExceptionMethodNotAlowed("Методы больше не существует");
     }
+
     @Override
     public Question remove(Question question) {
         throw new ExceptionMethodNotAlowed("Методы больше не существует");
     }
+
     @Override
     public Set<Question> getAll() {
-        throw new ExceptionMethodNotAlowed("Методы больше не существует");
+        return questions;
     }
+
     @Override
     public Question getRandomQuestion() {
         // получаем список вопросов
@@ -47,7 +51,7 @@ public class MathQuestionServiceImpl implements QuestionService {
         int index = 0;
         // проходим циклом по списку пока индекс не равен рандомному числу
         for (Question question : allQuestions) {
-            if(index == questionNum) {
+            if (index == questionNum) {
                 return question;
             }
             index++;

@@ -7,7 +7,9 @@ public class Question {
     private final String answer;
 
     public Question(String question, String answer) {
-        if(question.equals(answer)) throw new IllegalArgumentException("Вопрос и ответ - одно значение");
+        if (question.equals(answer)) {
+            throw new IllegalArgumentException("Вопрос и ответ - одно значение");
+        }
         this.question = question;
         this.answer = answer;
     }
@@ -22,8 +24,12 @@ public class Question {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Question question1 = (Question) o;
         return Objects.equals(question, question1.question) && Objects.equals(answer, question1.answer);
     }
@@ -35,7 +41,6 @@ public class Question {
 
     @Override
     public String toString() {
-        return "{Вопрос: " + question + '\n' +
-                "Ответ: " + answer + "}";
+        return "{Вопрос: " + question + '\n' + "Ответ: " + answer + "}";
     }
 }

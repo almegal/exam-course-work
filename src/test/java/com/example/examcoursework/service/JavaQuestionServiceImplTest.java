@@ -28,16 +28,13 @@ public class JavaQuestionServiceImplTest {
     @InjectMocks
     private JavaQuestionServiceImpl out;
     // константы
-    private final Question DEFAULT_QUESTION = new Question("Вопрос 1","Ответ 1");
-    private final Set<Question> DEFAULT_QUESTION_SET = Set.of(
-            new Question("Вопрос 1", "Ответ 1"),
-            new Question("Вопрос 2", "Ответ 2"),
-            new Question("Вопрос 3", "Ответ 3"),
-            new Question("Вопрос 4", "Ответ 4"));
+    private final Question DEFAULT_QUESTION = new Question("Вопрос 1", "Ответ 1");
+    private final Set<Question> DEFAULT_QUESTION_SET = Set.of(new Question("Вопрос 1", "Ответ 1"), new Question("Вопрос 2", "Ответ 2"), new Question("Вопрос 3", "Ответ 3"), new Question("Вопрос 4", "Ответ 4"));
+
     //----------------------------НАЧАЛО ТЕСТА -----------------------------------------------------//
     @Test
     @DisplayName("Добавить вопрос")
-    public void addWithCorrectParametr(){
+    public void addWithCorrectParametr() {
         // подготовка ожидаемого результата
         when(questionRepositoryMock.add(anyString(), anyString())).thenReturn(DEFAULT_QUESTION);
         // подготовка актуального значения
@@ -48,22 +45,23 @@ public class JavaQuestionServiceImplTest {
         assertEquals(DEFAULT_QUESTION, actualWIthTwoArgs);
         verify(questionRepositoryMock, times(2)).add(anyString(), anyString());
     }
+
     @Test
     @DisplayName("Исключение если аргументы не корректны метод add")
-    public void addWithIncorrectArgs(){
+    public void addWithIncorrectArgs() {
         // подготовка ожидаемого результата
         String expectedMsg = "Некорректный аргумент, метод ожидает Question, а переданы: null";
         // подготовка актуального результата
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
-                () -> {
-                    out.add(null);
-                });
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            out.add(null);
+        });
         // тест
         assertEquals(expectedMsg, thrown.getMessage());
     }
+
     @Test
     @DisplayName("Удалить вопрос")
-    public void removeIfQuesitonExsist(){
+    public void removeIfQuesitonExsist() {
         // подготовка ожидаемого результата
         when(questionRepositoryMock.remove(any())).thenReturn(DEFAULT_QUESTION);
         // подготовка актуального результата
@@ -72,22 +70,23 @@ public class JavaQuestionServiceImplTest {
         assertEquals(DEFAULT_QUESTION, actual);
         verify(questionRepositoryMock, times(1)).remove(any());
     }
+
     @Test
     @DisplayName("Исключение если аргументы не корректны метод remove")
-    public void removeWithIncorrectArgs(){
+    public void removeWithIncorrectArgs() {
         // подготовка ожидаемого результата
         String expectedMsg = "Некорректный аргумент, метод ожидает Question, а переданы: null";
         // подготовка актуального результата
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
-                () -> {
-                    out.remove(null);
-                });
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+            out.remove(null);
+        });
         // тест
         assertEquals(expectedMsg, thrown.getMessage());
     }
+
     @Test
     @DisplayName("Получить список вопросов")
-    public void getAllQuestions(){
+    public void getAllQuestions() {
         // подготовка ожидаемого результата
         when(questionRepositoryMock.getAll()).thenReturn(DEFAULT_QUESTION_SET);
         // подготовка ожидаемого результата
@@ -96,9 +95,10 @@ public class JavaQuestionServiceImplTest {
         assertEquals(DEFAULT_QUESTION_SET, actual);
         verify(questionRepositoryMock, only()).getAll();
     }
+
     @Test
     @DisplayName("получить рандомный вопрос")
-    public void getRandomQuestion(){
+    public void getRandomQuestion() {
         // подготовка ожидаемого результата
         when(questionRepositoryMock.getAll()).thenReturn(DEFAULT_QUESTION_SET);
         when(randomMock.nextInt(anyInt())).thenReturn(3);

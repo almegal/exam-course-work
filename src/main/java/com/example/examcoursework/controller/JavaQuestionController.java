@@ -18,18 +18,21 @@ public class JavaQuestionController {
     public JavaQuestionController(@Qualifier("JavaQuestionServiceImpl") QuestionService questionService) {
         this.questionService = questionService;
     }
-    @GetMapping(path="/add")
+
+    @GetMapping(path = "/add")
     public Question add(
             @RequestParam("question") String question,
             @RequestParam("answer") String answer) {
         return questionService.add(question, answer);
     }
-    @GetMapping(path="/remove")
+
+    @GetMapping(path = "/remove")
     public Question remove(
             @RequestParam("question") String question,
             @RequestParam("answer") String answer) {
         return questionService.remove(new Question(question, answer));
     }
+
     @GetMapping(path = "/find")
     public Set<Question> remove() {
         return questionService.getAll();

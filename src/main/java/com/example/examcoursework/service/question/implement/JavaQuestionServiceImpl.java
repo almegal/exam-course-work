@@ -20,26 +20,31 @@ public class JavaQuestionServiceImpl implements QuestionService {
         this.questionRepository = questionRepository;
         this.random = random;
     }
+
     @Override
     public Question add(String question, String answer) {
         return questionRepository.add(question, answer);
     }
+
     @Override
     public Question add(Question question) {
         // проверка аргумента
         checkArgs(question);
         return questionRepository.add(question.getQuestion(), question.getAnswer());
     }
+
     @Override
     public Question remove(Question question) {
         // проверка аргумента
         checkArgs(question);
         return questionRepository.remove(question);
     }
+
     @Override
     public Set<Question> getAll() {
         return questionRepository.getAll();
     }
+
     @Override
     public Question getRandomQuestion() {
         // получаем список вопросов
@@ -50,16 +55,17 @@ public class JavaQuestionServiceImpl implements QuestionService {
         int index = 0;
         // проходим циклом по списку пока индекс не равен рандомному числу
         for (Question question : allQuestions) {
-            if(index == questionNum) {
+            if (index == questionNum) {
                 return question;
             }
             index++;
         }
         throw new IllegalStateException("Что-то пошло не так при выборе рандомного елемента");
     }
+
     // проверяем аргумент
     private void checkArgs(Question question) {
-        if(question == null) {
+        if (question == null) {
             throw new IllegalArgumentException("Некорректный аргумент, метод ожидает Question, а переданы: null");
         }
     }
